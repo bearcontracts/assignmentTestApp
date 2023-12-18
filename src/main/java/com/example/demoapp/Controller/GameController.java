@@ -37,12 +37,12 @@ public class GameController {
         if (!tokenInit.isTokenValid(token)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
-        GameCreationResponse gg = new GameCreationResponse();
+        GameCreationResponse response = new GameCreationResponse();
         boolean isCreated = gameService.registerGame(request);
 
         if(isCreated){
-            gg.setGameId(UUID.randomUUID().toString());
-            return ResponseEntity.status(HttpStatus.OK).body(gg);
+            response.setGameId(UUID.randomUUID().toString());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
         else return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate game");
     }
@@ -52,13 +52,13 @@ public class GameController {
         if (!tokenInit.isTokenValid(token)) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid token");
         }
-        GamePurchaseResponse gg = new GamePurchaseResponse();
+        GamePurchaseResponse response = new GamePurchaseResponse();
         User gameUser = gameService.buyGames(request);
         if(gameUser != null){
-            gg.setBalance(gameUser.getBalance());
-            gg.setGameId(request.getGameId());
-            return ResponseEntity.status(HttpStatus.OK).body(gg);
+            response.setBalance(gameUser.getBalance());
+            response.setGameId(request.getGameId());
+            return ResponseEntity.status(HttpStatus.OK).body(response);
         }
-        else return ResponseEntity.status(HttpStatus.CONFLICT).body("Duplicate game");
+        else return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 }

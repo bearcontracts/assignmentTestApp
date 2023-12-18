@@ -45,9 +45,9 @@ public class UserController {
     @PostMapping("/token")
     public ResponseEntity<?> loginUser(@RequestBody UserRequest request){
             AuthenticationResponse authenticationResponse = new AuthenticationResponse();
-            Optional<User> user1 = userRepository.findByUsernameAndPassword(request.getUsername(), request.getPassword());
-            if(user1.isPresent()){
-                User user = user1.get();
+            Optional<User> users = userRepository.findByUsernameAndPassword(request.getUsername(), request.getPassword());
+            if(users.isPresent()){
+                User user = users.get();
 
                 authenticationResponse.setToken((tokenInit.generateTokenForUser(request.getUsername())));
                 authenticationResponse.setBalance(user.getBalance());

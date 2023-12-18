@@ -2,6 +2,8 @@ package com.example.demoapp.Model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,9 +28,13 @@ public class User {
     private Long userId;
 
     @Column(unique = true, nullable = false, name = "user_name")
+    @NotBlank(message="Username must not be blank")
+    @Size(min=3, message="Username must be at least 3 characters long")
     private String username;
 
     @Column(unique = true, nullable = false, name = "password")
+    @NotBlank(message="Password must not be blank")
+    @Size(min=5, message="Password must be at least 5 characters long")
     private String password;
 
     private Integer balance;

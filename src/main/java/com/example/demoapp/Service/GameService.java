@@ -37,8 +37,8 @@ public class GameService {
     }
 
     public User buyGames(GamePurchaseRequest request){
-        Long game1 = request.getGameId();
-        Optional<Game> findGame = gameRepository.findByGameId(game1);
+        Long games = request.getGameId();
+        Optional<Game> findGame = gameRepository.findByGameId(games);
         Optional<User> findUser = userRepository.findByUsername(request.getUsername());
         if(findGame.isPresent() && findUser.isPresent()){
             Game game = findGame.get();
