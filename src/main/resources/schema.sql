@@ -26,6 +26,6 @@ CREATE TABLE user_game (
                            user_id BIGINT NOT NULL,
                            game_id BIGINT NOT NULL,
                            PRIMARY KEY (user_id, game_id),
-                           FOREIGN KEY (user_id) REFERENCES user_table_name (user_id),
-                           FOREIGN KEY (game_id) REFERENCES game_table_name (game_id)
+                           FOREIGN KEY (user_id) REFERENCES users (user_id),
+                           FOREIGN KEY (game_id) REFERENCES game (game_id)
 );
